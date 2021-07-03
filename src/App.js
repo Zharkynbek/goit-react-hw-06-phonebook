@@ -1,6 +1,5 @@
 import React from "react";
-import Phonebook from "./components/Phonebook/Phonebook"
-
+import Phonebook from "./components/Phonebook/Phonebook";
 
 class App extends React.Component {
   render() {
@@ -12,4 +11,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+
+
+export default App
