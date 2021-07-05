@@ -1,22 +1,22 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../redux/phonebookActions";
-import shortId from "shortid"
+import shortId from "shortid";
 
 class PhonebookForm extends Component {
   state = {
     name: "",
-    number: ""
-  }
+    number: "",
+  };
 
   handleSetContact = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   handleAddContact = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     this.props.onAddContact({
       name: this.state.name,
       number: this.state.number,
@@ -24,10 +24,9 @@ class PhonebookForm extends Component {
     });
     this.setState({
       name: "",
-      number: ""
-    })
-  }
-
+      number: "",
+    });
+  };
 
   render() {
     return (
@@ -63,8 +62,7 @@ class PhonebookForm extends Component {
       </div>
     );
   }
-  
-};
+}
 
 const mapDispatchToProps = (dispatch) => ({
   onAddContact: (contact) => dispatch(actions.addContact(contact)),
