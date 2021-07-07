@@ -1,7 +1,6 @@
-import React from "react"
-import { connect } from "react-redux"
-import * as actions from "../../redux/phonebookActions"
-
+import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../../redux/phonebookActions";
 
 const PhonebookFilter = ({ filterValue, onFilterContact }) => {
   return (
@@ -24,8 +23,8 @@ const PhonebookFilter = ({ filterValue, onFilterContact }) => {
 };
 
 const mapStateToProps = (state) => ({
-  filterValue: state.phonebook.filter
-})
+  filterValue: state.filter,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onFilterContact: (e) => dispatch(actions.handleFilterContacts(e)),

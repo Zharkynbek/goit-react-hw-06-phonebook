@@ -17,6 +17,10 @@ class PhonebookForm extends Component {
 
   handleAddContact = (e) => {
     e.preventDefault();
+    if (this.props.contacts.some((el) => el.name === this.state.name)) {
+      alert("contact to ready in contact");
+      return;
+    }
     this.props.onAddContact({
       name: this.state.name,
       number: this.state.number,
@@ -68,4 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
   onAddContact: (contact) => dispatch(actions.addContact(contact)),
 });
 
-export default connect((state) => state, mapDispatchToProps)(PhonebookForm);
+export default connect(
+  (state) => ({ contacts: state.contacts }),
+  mapDispatchToProps
+)(PhonebookForm);
