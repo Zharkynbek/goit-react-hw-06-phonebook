@@ -17,8 +17,8 @@ class PhonebookForm extends Component {
 
   handleAddContact = (e) => {
     e.preventDefault();
-    if (this.props.contacts.some((el) => el.name === this.state.name)) {
-      alert("contact to ready in contact");
+    if (this.props.contacts.some(({ name }) => name === this.state.name)) {
+      alert(`${this.state.name} is already in contact`);
       return;
     }
     this.props.onAddContact({
