@@ -1,78 +1,77 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actions from "../../redux/phonebookActions";
+import React, { useState } from "react";
+// import { connect } from "react-redux";
+// import * as actions from "../../redux/phonebookActions";
 import shortId from "shortid";
 
-class PhonebookForm extends Component {
-  state = {
-    name: "",
-    number: "",
+export default function PhonebookForm({ onAddContact, contacts }) {
+  // state = {
+  //   name: "",
+  //   number: "",
+  // };
+
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+
+  const handleSetContact = (e) => {
+    setName(e.target.value);
   };
 
-  handleSetContact = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  handleAddContact = (e) => {
+  const handleAddContact = (e) => {
     e.preventDefault();
-    if (this.props.contacts.some(({ name }) => name === this.state.name)) {
-      alert(`${this.state.name} is already in contact`);
+    if (contacts.some(({ name }) => name === name)) {
+      alert(`${name} is already in contact`);
       return;
     }
-    this.props.onAddContact({
-      name: this.state.name,
-      number: this.state.number,
+    onAddContact({
+      name: name,
+      number: number,
       id: shortId.generate(),
     });
-    this.setState({
-      name: "",
-      number: "",
-    });
+    // setState({
+    //   name: "",
+    //   number: "",
+    // });
   };
 
-  render() {
-    return (
-      <div>
-        <form action="submit" onSubmit={this.handleAddContact}>
-          <label htmlFor="">
-            <p>enter name</p>
-            <input
-              onInput={this.handleSetContact}
-              type="text"
-              name="name"
-              value={this.state.name}
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-              required
-            />
-          </label>
-          <label>
-            <p>enter phone number</p>
-            <input
-              onInput={this.handleSetContact}
-              type="tel"
-              name="number"
-              value={this.state.number}
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-              required
-            />
-          </label>
-          <br />
-          <button>Add Contact</button>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <form action="submit" onSubmit={handleAddContact}>
+        <label htmlFor="">
+          <p>enter name</p>
+          <input
+            onInput={handleSetContact}
+            type="text"
+            name="name"
+            value={name}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            required
+          />
+        </label>
+        <label>
+          <p>enter phone number</p>
+          <input
+            onInput={handleSetContact}
+            type="tel"
+            name="number"
+            value={number}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+            required
+          />
+        </label>
+        <br />
+        <button>Add Contact</button>
+      </form>
+    </div>
+  );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onAddContact: (contact) => dispatch(actions.addContact(contact)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onAddContact: (contact) => dispatch(actions.addContact(contact)),
+// });
 
-export default connect(
-  (state) => ({ contacts: state.contacts }),
-  mapDispatchToProps
-)(PhonebookForm);
+// export default connect(
+//   (state) => ({ contacts: state.contacts }),
+//   mapDispatchToProps
+// )(PhonebookForm);
