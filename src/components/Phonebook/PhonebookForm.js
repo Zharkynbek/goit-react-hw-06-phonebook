@@ -15,6 +15,10 @@ class PhonebookForm extends Component {
     });
   };
 
+  componentDidMount() {
+    document.title = "phonebook-06";
+  }
+
   handleAddContact = (e) => {
     e.preventDefault();
     if (this.props.contacts.some(({ name }) => name === this.state.name)) {
